@@ -1,27 +1,23 @@
 {
-  "name": "react-webpack-typescript-starter",
+  "name": "nightscout-exporter",
   "version": "0.1.0",
-  "description": "Starter kit for React, Webpack (with Hot Module Replacement), Typescript and Babel.",
+  "description": "A utility to export Nightscout data as CSV or XLSX files.",
   "keywords": [
-    "react",
-    "webpack",
-    "typescript",
-    "babel",
-    "sass",
-    "hmr",
-    "starter",
-    "boilerplate"
+    "nightscout",
+    "csv",
+    "xlsx",
+    "typescript"
   ],
-  "author": "Viktor Persson",
+  "author": "Jan Starzak",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vikpe/react-webpack-typescript-starter.git"
+    "url": "git+https://github.com/jstarpl/nightscout-exporter.git"
   },
   "bugs": {
-    "url": "https://github.com/vikpe/react-webpack-typescript-starter/issues"
+    "url": "https://github.com/jstarpl/nightscout-exporter/issues"
   },
-  "homepage": "https://github.com/vikpe/react-webpack-typescript-starter",
+  "homepage": "https://github.com/jstarpl/nightscout-exporter",
   "scripts": {
     "build": "yarn run clean-dist && webpack -p --config=configs/webpack/prod.js",
     "clean-dist": "rimraf dist/*",
@@ -64,5 +60,14 @@
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/file-saver": "^2.0.1",
+    "@types/underscore": "^1.9.2",
+    "file-saver": "^2.0.2",
+    "react-bootstrap": "^1.0.0-beta.9",
+    "underscore": "^1.9.1",
+    "url": "^0.11.0",
+    "url-parse-lax": "^4.0.0",
+    "xlsx": "^0.14.3"
+  }
 }
