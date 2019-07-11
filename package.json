@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/jstarpl/nightscout-exporter/issues"
   },
-  "homepage": "https://github.com/jstarpl/nightscout-exporter",
+  "homepage": "https://jstarpl.github.io/nightscout-exporter",
   "scripts": {
     "build": "yarn run clean-dist && webpack -p --config=configs/webpack/prod.js",
     "clean-dist": "rimraf dist/*",
@@ -25,7 +25,9 @@
     "start": "yarn run start-dev",
     "start-dev": "webpack-dev-server --config=configs/webpack/dev.js",
     "start-prod": "yarn run build && node express.js",
-    "test": "jest --watch --coverage --config=configs/jest.json"
+    "test": "jest --watch --coverage --config=configs/jest.json",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",
@@ -64,6 +66,7 @@
     "@types/file-saver": "^2.0.1",
     "@types/underscore": "^1.9.2",
     "file-saver": "^2.0.2",
+    "gh-pages": "^2.0.1",
     "react-bootstrap": "^1.0.0-beta.9",
     "underscore": "^1.9.1",
     "url": "^0.11.0",

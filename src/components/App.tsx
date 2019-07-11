@@ -1,10 +1,18 @@
 import * as React from "react";
 import * as _ from "underscore";
-import { Container, FormControl, InputGroup, ButtonToolbar, Button, FormCheck, FormLabel, Alert } from "react-bootstrap";
+import {
+    Container,
+    FormControl,
+    InputGroup,
+    ButtonToolbar,
+    Button,
+    FormCheck,
+    FormLabel,
+    Alert,
+} from "react-bootstrap";
 import { hot } from "react-hot-loader";
 import { ExportFormats, converterFactory } from "../utils/Converter";
 import * as fileSaver from "file-saver";
-import * as urlFormatLax from "url-format-lax";
 import * as url from "url";
 import * as urlParseLax from "url-parse-lax";
 
