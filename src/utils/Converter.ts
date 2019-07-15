@@ -1,5 +1,6 @@
 import { CSVConverter } from "./CSVConverter";
 import { XLSXConverter } from "./XLSXConverter";
+import { IOptions } from "../components/App";
 
 export enum ExportFormats {
     XLSX = "xlsx",
@@ -11,12 +12,12 @@ export interface IConverter {
     convert(): Blob;
 }
 
-export function converterFactory(mode: ExportFormats, columns: string[], data: object[]) {
+export function converterFactory(mode: ExportFormats, columns: string[], data: object[], options: IOptions) {
     switch (mode) {
         case ExportFormats.XLSX:
-            return new XLSXConverter(columns, data);
+            return new XLSXConverter(columns, data, options);
         case ExportFormats.CSV:
-            return new CSVConverter(columns, data);
+            return new CSVConverter(columns, data, options);
     }
     throw new Error("Unknown conversion format");
 }

@@ -1,11 +1,12 @@
 import { IConverter } from "./Converter";
 import * as xlsx from "xlsx";
+import { IOptions } from "../components/App";
 
 export class XLSXConverter implements IConverter {
     private _columns: string[];
     private _data: object[];
 
-    constructor(columns: string[], data: object[]) {
+    constructor(columns: string[], data: object[], options: IOptions) {
         this._columns = columns;
         this._data = data;
     }

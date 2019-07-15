@@ -23,6 +23,10 @@ import { processData } from "../utils/Processor";
 
 // const reactLogo = require("./../assets/img/react_logo.svg");
 
+export interface IOptions {
+    semicolonSeparated?: boolean;
+}
+
 interface IState {
     apiSecret: string;
     error: string | undefined;
@@ -30,6 +34,7 @@ interface IState {
     range: Date[];
     url: string;
     working: boolean;
+    options: IOptions;
 }
 
 class App extends React.Component<{}, IState> {
@@ -48,6 +53,7 @@ class App extends React.Component<{}, IState> {
             apiSecret: "",
             error: undefined,
             format: ExportFormats.XLSX,
+            options: {},
             range: [
                 new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1),
                 new Date(today.getFullYear(), today.getMonth(), today.getDate()),
@@ -102,6 +108,17 @@ class App extends React.Component<{}, IState> {
                                 checked={this.state.format === ExportFormats[key]}
                                 onChange={(e) => this.changeFormat(e, ExportFormats[key])} />)}
                     </div>
+                    <div className="mb-3">
+                        <FormCheck
+                            custom
+                            type="checkbox"
+                            label="Use semicolons in CSV"
+                            id="semicolonSeparated"
+                            checked={this.state.options.semicolonSeparated === true}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                this.changeOption(e, "semicolonSeparated", !!e.target.checked);
+                            }} />
+                    </div>
                     <ButtonToolbar className="mb-3">
                         <Button variant="primary" onClick={(e) => this.fetchAndConvert()}>Export</Button>
                         {this.state.working && <Spinner animation="border" bsPrefix="ml-3 mt-1 spinner" />}
@@ -120,6 +137,12 @@ class App extends React.Component<{}, IState> {
             "range",
             "working",
         ])));
+    }
+
+    private changeOption(e: React.ChangeEvent<HTMLInputElement>, option: string, value: any) {
+        const obj = {};
+        obj[option] = value;
+        this.setState({ options: obj });
     }
 
     private changeRange(e: Date[]) {
@@ -212,7 +235,7 @@ class App extends React.Component<{}, IState> {
 
             data = processData(data);
             const columns = _.keys(data[0]);
-            const converter = converterFactory(this.state.format, columns, data);
+            const converter = converterFactory(this.state.format, columns, data, this.state.options);
             const hostName = (urlParseLax(this.state.url).hostname) || "unknown";
 
             const blob = converter.convert();
