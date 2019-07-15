@@ -19,6 +19,7 @@ import * as url from "url";
 import * as urlParseLax from "url-parse-lax";
 import DateTimeRangePicker from "@wojtekmaj/react-datetimerange-picker";
 import { sha1 } from "../utils/Crypto";
+import { processData } from "../utils/Processor";
 
 // const reactLogo = require("./../assets/img/react_logo.svg");
 
@@ -209,6 +210,7 @@ class App extends React.Component<{}, IState> {
                 throw new Error("Unexpected response from Nightscout");
             }
 
+            data = processData(data);
             const columns = _.keys(data[0]);
             const converter = converterFactory(this.state.format, columns, data);
             const hostName = (urlParseLax(this.state.url).hostname) || "unknown";
