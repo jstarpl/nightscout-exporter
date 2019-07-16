@@ -184,7 +184,7 @@ class App extends React.Component<{}, IState> {
         return url.format(urlParseLax(apiUrl)) +
             "v1/entries.json?find[dateString][$gte]=" +
             begin.toISOString() +
-            "&find[dateString][$lte]=" +
+            "&find[dateString][$lt]=" +
             end.toISOString() +
             "&count=1000";
     }
