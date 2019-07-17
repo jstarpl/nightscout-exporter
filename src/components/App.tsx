@@ -69,17 +69,17 @@ class App extends React.Component<{}, IState> {
                 <Container className="mt-5 mb-5">
                     <h1>Nightscout Exporter</h1>
                     <FormLabel htmlFor="url">
-                        Your Nighscout API endpoint
+                        Nightscout API endpoint URL
                     </FormLabel>
                     <InputGroup className="mb-2">
                         <FormControl
                             id="url"
                             value={this.state.url}
                             onChange={(e) => this.changeUrl(e)}
-                            placeholder="https://example.com/api/" />
+                            placeholder="https://YOUR-OWN-NIGHTSCOUT-URL/api/" />
                     </InputGroup>
                     <FormLabel htmlFor="apiSecret">
-                        API Secret
+                        Nightscout API Secret <em>(only required if the Nightscout instance has customized authentication rules)</em>
                     </FormLabel>
                     <InputGroup className="mb-2">
                         <FormControl
@@ -112,7 +112,7 @@ class App extends React.Component<{}, IState> {
                         <FormCheck
                             custom
                             type="checkbox"
-                            label="Use semicolons in CSV"
+                            label="Use semicolons instead of comma separators in CSV"
                             id="semicolonSeparated"
                             checked={this.state.options.semicolonSeparated === true}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
