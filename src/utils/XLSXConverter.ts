@@ -3,12 +3,12 @@ import * as xlsx from "xlsx";
 import { IOptions } from "../components/App";
 
 export class XLSXConverter implements IConverter {
-    private _columns: string[];
-    private _data: object[];
+    private columns: string[];
+    private data: object[];
 
     constructor(columns: string[], data: object[], options: IOptions) {
-        this._columns = columns;
-        this._data = data;
+        this.columns = columns;
+        this.data = data;
     }
 
     public get extension(): string {
@@ -17,13 +17,13 @@ export class XLSXConverter implements IConverter {
 
     public convert(): Blob {
         const data: string[][] = [
-            this._columns,
-            ...this._data.map((row) => this._columns.map((prop) => row[prop])),
+            this.columns,
+            ...this.data.map((row) => this.columns.map((prop) => row[prop])),
         ];
         const sheet = xlsx.utils.aoa_to_sheet(data);
 
         // Convert to native data types
-        const dateIdx = this._columns.indexOf("date");
+        const dateIdx = this.columns.indexOf("date");
         if (dateIdx >= 0) {
             const column = xlsx.utils.encode_col(dateIdx);
             let i = 2;
@@ -36,7 +36,7 @@ export class XLSXConverter implements IConverter {
 
         const wb: xlsx.WorkBook = {
             SheetNames: [
-                "Data"
+                "Data",
             ],
             Sheets: {
                 Data: sheet,

@@ -2,13 +2,13 @@ import { IConverter } from "./Converter";
 import { IOptions } from "../components/App";
 
 export class CSVConverter implements IConverter {
-    private _columns: string[];
-    private _data: object[];
+    private columns: string[];
+    private data: object[];
     private _separator: string = ",";
 
     constructor(columns: string[], data: object[], options: IOptions) {
-        this._columns = columns;
-        this._data = data;
+        this.columns = columns;
+        this.data = data;
         if (options.semicolonSeparated) {
             this._separator = ";";
         }
@@ -30,9 +30,9 @@ export class CSVConverter implements IConverter {
         // MS Excel needs to be hinted at the used separator, since it uses a separator from
         // the system Regional settings
         let result = "SEP=" + this._separator + "\r\n";
-        result += this._columns.map((val) => "\"" + val + "\"").join(this._separator) + "\r\n";
-        result += this._data.map((row) => {
-            return this._columns.map((property) => "\"" + row[property] + "\"").join(this._separator);
+        result += this.columns.map((val) => "\"" + val + "\"").join(this._separator) + "\r\n";
+        result += this.data.map((row) => {
+            return this.columns.map((property) => "\"" + row[property] + "\"").join(this._separator);
         }).join("\r\n");
         result += "\r\n";
 
